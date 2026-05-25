@@ -41,6 +41,9 @@
             <h2>音楽遍歴</h2>
             <p class="section-lead">過去から現在までのサウンドヒストリー。創作の原点と進化を辿るページです。</p>
         </div>
+        <div class="hero-actions hero-actions-top">
+            <a class="button button-secondary" href="setlist.html">秋山黄色セットリスト分析</a>
+        </div>
         <!-- ライブ参加履歴テーブル -->
         <div class="live-history-container">
             <div class="table-controls">
@@ -63,6 +66,10 @@
                 </div>
             </div>
 
+            <div class="result-count-wrapper">
+                <span id="resultCount" class="result-count"></span>
+            </div>
+
             <div class="table-wrapper">
                 <table id="liveHistoryTable" class="live-history-table">
                     <thead>
@@ -81,7 +88,6 @@
                 </table>
             </div>
 
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
         </div>
         <div class="hero-actions">
             <a class="button button-primary" href="index.html#home">ホームに戻る</a>

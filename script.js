@@ -69,6 +69,7 @@ function renderTable(data) {
     
     if (data.length === 0) {
         tbody.innerHTML = '<tr class="empty-row"><td colspan="4">データが見つかりません</td></tr>';
+        updateResultCount(0);
         return;
     }
     
@@ -80,6 +81,18 @@ function renderTable(data) {
             <td class="col-location">${escapeHtml(item.location)}</td>
         </tr>
     `).join('');
+    
+    updateResultCount(data.length);
+}
+
+/**
+ * 検索結果の件数を表示
+ */
+function updateResultCount(count) {
+    const resultCountElement = document.getElementById('resultCount');
+    if (resultCountElement) {
+        resultCountElement.textContent = `検索結果: ${count}件`;
+    }
 }
 
 /**

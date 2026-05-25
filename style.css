@@ -745,6 +745,25 @@ footer p {
     font-size: 0.95rem;
 }
 
+.result-count-wrapper {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.result-count {
+    color: #9bb4ff;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.hero-actions-top {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
 @media (max-width: 768px) {
     .table-controls {
         grid-template-columns: 1fr;
