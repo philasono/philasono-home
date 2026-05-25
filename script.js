@@ -15,6 +15,11 @@ const SHEET_NAME = 'シート1';
 // ライブ参加履歴のデータ管理
 // ========================================
 let allLiveData = [];
+let currentState = {
+    sortType: 'date-desc',
+    searchQuery: '',
+    yearFilter: 'all'
+};
 
 /**
  * Google Sheetsからデータを取得
@@ -46,7 +51,8 @@ async function fetchLiveData() {
         }));
         
         allLiveData = liveData;
-        renderTable(allLiveData);
+        populateYearFilter(allLiveData);
+        applyFiltersAndSort();
         hideErrorMessage();
         
     } catch (error) {
@@ -126,43 +132,76 @@ function escapeHtml(text) {
  * テーブルをソート
  */
 function sortTable(sortType) {
-    let sorted = [...allLiveData];
-    
-    switch(sortType) {
+    currentState.sortType = sortType;
+    applyFiltersAndSort();
+}
+
+function filterTable(searchText) {
+    currentState.searchQuery = searchText.toLowerCase();
+    applyFiltersAndSort();
+}
+
+function setYearFilter(year) {
+    currentState.yearFilter = year;
+    applyFiltersAndSort();
+}
+
+function applyFiltersAndSort() {
+    let result = [...allLiveData];
+
+    if (currentState.searchQuery) {
+        result = result.filter(item =>
+            item.title.toLowerCase().includes(currentState.searchQuery) ||
+            item.location.toLowerCase().includes(currentState.searchQuery)
+        );
+    }
+
+    if (currentState.yearFilter !== 'all') {
+        result = result.filter(item => getYearFromDate(item.date) === currentState.yearFilter);
+    }
+
+    switch(currentState.sortType) {
         case 'date-desc':
-            sorted.sort((a, b) => {
+            result.sort((a, b) => {
                 const dateA = parseSheetDate(a.date);
                 const dateB = parseSheetDate(b.date);
                 return (dateB ? dateB.getTime() : 0) - (dateA ? dateA.getTime() : 0);
             });
             break;
         case 'date-asc':
-            sorted.sort((a, b) => {
+            result.sort((a, b) => {
                 const dateA = parseSheetDate(a.date);
                 const dateB = parseSheetDate(b.date);
                 return (dateA ? dateA.getTime() : 0) - (dateB ? dateB.getTime() : 0);
             });
             break;
         case 'title':
-            sorted.sort((a, b) => a.title.localeCompare(b.title, 'ja'));
+            result.sort((a, b) => a.title.localeCompare(b.title, 'ja'));
             break;
     }
-    
-    renderTable(sorted);
+
+    renderTable(result);
 }
 
-/**
- * テーブルをフィルタリング
- */
-function filterTable(searchText) {
-    const query = searchText.toLowerCase();
-    
-    const filtered = allLiveData.filter(item => 
-        item.title.toLowerCase().includes(query) ||
-        item.location.toLowerCase().includes(query)
-    );
-    
-    renderTable(filtered);
+function populateYearFilter(data) {
+    const yearSelect = document.getElementById('yearFilterSelect');
+    if (!yearSelect) return;
+
+    const years = Array.from(new Set(
+        data.map(item => getYearFromDate(item.date)).filter(Boolean)
+    )).sort((a, b) => Number(b) - Number(a));
+
+    const options = ['<option value="all">すべて</option>'];
+    years.forEach(year => {
+        options.push(`<option value="${year}">${year}</option>`);
+    });
+    yearSelect.innerHTML = options.join('');
+}
+
+function getYearFromDate(dateStr) {
+    if (!dateStr) return '';
+    const match = dateStr.match(/\d{4}/);
+    return match ? match[0] : '';
 }
 
 /**
@@ -200,6 +239,13 @@ function initializeEventListeners() {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             filterTable(e.target.value);
+        });
+    }
+
+    const yearFilterSelect = document.getElementById('yearFilterSelect');
+    if (yearFilterSelect) {
+        yearFilterSelect.addEventListener('change', (e) => {
+            setYearFilter(e.target.value);
         });
     }
 }
