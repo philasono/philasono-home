@@ -549,13 +549,28 @@ footer p {
 .table-controls {
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
     margin-bottom: 2rem;
     align-items: end;
 }
 
 .search-wrapper {
     position: relative;
+}
+
+.filter-wrapper,
+.sort-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    white-space: nowrap;
+}
+
+.filter-wrapper label,
+.sort-wrapper label {
+    color: #cbd5ff;
+    font-weight: 500;
+    font-size: 0.95rem;
 }
 
 .search-box {

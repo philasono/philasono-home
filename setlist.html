@@ -47,11 +47,12 @@
                 <div class="search-wrapper">
                     <input type="text" id="searchInput" class="search-box" placeholder="ライブ名・曲名で検索...">
                 </div>
-                <div class="sort-wrapper">
-                    <label for="sortSelect">ソート：</label>
-                    <select id="sortSelect" class="sort-select">
-                        <option value="date-desc">参加日（新しい順）</option>
-                        <option value="date-asc">参加日（古い順）</option>
+                    <div class="filter-wrapper">
+                        <label for="yearFilterSelect">参加年：</label>
+                        <select id="yearFilterSelect" class="sort-select">
+                            <option value="all">すべて</option>
+                        </select>
+                    </div>
                         <option value="title">ライブ名（A-Z）</option>
                         <option value="song">曲名（A-Z）</option>
                     </select>
