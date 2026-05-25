@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philasono - 秋山黄色セットリスト分析</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-bg"></div>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="brand">
+                <span class="brand-mark">P</span>
+                <div>
+                    <div class="logo">Philasono</div>
+                    <p class="tagline">未来型デジタルプレゼンス</p>
+                </div>
+            </div>
+
+            <button class="menu-toggle" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="menu">
+                <li><a href="index.html#home">ホーム</a></li>
+                <li><a href="index.html#about">について</a></li>
+                <li><a href="music.html">音楽遍歴</a></li>
+                <li><a class="active" href="setlist.html">セットリスト分析</a></li>
+                <li><a href="index.html#contact">連絡先</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="section section-alt section-music">
+        <div class="section-header section-header-music">
+            <p class="eyebrow">SETLIST</p>
+            <h2>秋山黄色セットリスト分析</h2>
+            <p class="section-lead">曲ごとのパフォーマンスを1件ずつ記録し、曲別ランキング作成に活用できるように表示します。</p>
+        </div>
+
+        <div class="live-history-container">
+            <div class="table-controls">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" class="search-box" placeholder="ライブ名・曲名で検索...">
+                </div>
+                <div class="sort-wrapper">
+                    <label for="sortSelect">ソート：</label>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="date-desc">参加日（新しい順）</option>
+                        <option value="date-asc">参加日（古い順）</option>
+                        <option value="title">ライブ名（A-Z）</option>
+                        <option value="song">曲名（A-Z）</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="liveHistoryTable" class="live-history-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>曲名</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liveTableBody">
+                        <tr class="loading-row">
+                            <td colspan="2">データを読み込み中...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+
+        <div class="hero-actions">
+            <a class="button button-primary" href="music.html">音楽遍歴に戻る</a>
+            <a class="button button-secondary" href="index.html#home">ホームに戻る</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Philasono. Designed with a modern edge.</p>
+    </footer>
+    <script src="setlist.js"></script>
+</body>
+</html>
