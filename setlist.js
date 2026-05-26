@@ -124,6 +124,48 @@ function formatDate(dateStr) {
 }
 
 /**
+ * 検索結果件数を表示
+ */
+function renderResultCount(count) {
+    const countElement = document.getElementById('resultCount');
+    if (!countElement) return;
+    const label = count === 0 ? 'データが見つかりません' : `検索結果：${count}件`;
+    countElement.textContent = label;
+}
+
+/**
+ * 曲名ランキングTOP10を表示
+ */
+function renderTopRanking(data) {
+    const rankingElement = document.getElementById('topRankingList');
+    if (!rankingElement) return;
+
+    const counts = data.reduce((acc, item) => {
+        const song = item.song || '不明';
+        acc[song] = (acc[song] || 0) + 1;
+        return acc;
+    }, {});
+
+    const ranking = Object.entries(counts)
+        .map(([song, count]) => ({ song, count }))
+        .sort((a, b) => b.count - a.count || a.song.localeCompare(b.song, 'ja'))
+        .slice(0, 10);
+
+    if (ranking.length === 0) {
+        rankingElement.innerHTML = '<li>データを読み込み中...</li>';
+        return;
+    }
+
+    rankingElement.innerHTML = ranking.map((item, index) => `
+        <li>
+            <span class="ranking-position">${index + 1}.</span>
+            <span class="ranking-song">${escapeHtml(item.song)}</span>
+            <span class="ranking-count">${item.count}回</span>
+        </li>
+    `).join('');
+}
+
+/**
  * HTMLエスケープ
  */
 function escapeHtml(text) {
@@ -179,7 +221,9 @@ function applyFiltersAndSort() {
             break;
     }
 
+    renderResultCount(result.length);
     renderTable(result);
+    renderTopRanking(allSetlistData);
 }
 
 function populateYearFilter(data) {

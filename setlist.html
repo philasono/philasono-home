@@ -42,21 +42,41 @@
             <p class="section-lead">曲ごとのパフォーマンスを1件ずつ記録し、曲別ランキング作成に活用できるように表示します。</p>
         </div>
 
+        <div class="ranking-wrapper">
+            <div class="ranking-header">
+                <p class="eyebrow">ランキング</p>
+                <h3>登場回数が多い曲名 TOP10</h3>
+                <p class="section-lead">セットリスト内で登場した回数が多い順に、上位10曲を集計して表示します。</p>
+            </div>
+            <ol id="topRankingList" class="top-ranking-list">
+                <li>読み込み中...</li>
+            </ol>
+        </div>
+
         <div class="live-history-container">
             <div class="table-controls">
                 <div class="search-wrapper">
                     <input type="text" id="searchInput" class="search-box" placeholder="ライブ名・曲名で検索...">
                 </div>
-                    <div class="filter-wrapper">
-                        <label for="yearFilterSelect">参加年：</label>
-                        <select id="yearFilterSelect" class="sort-select">
-                            <option value="all">すべて</option>
-                        </select>
-                    </div>
+                <div class="filter-wrapper">
+                    <label for="yearFilterSelect">参加年：</label>
+                    <select id="yearFilterSelect" class="sort-select">
+                        <option value="all">すべて</option>
+                    </select>
+                </div>
+                <div class="sort-wrapper">
+                    <label for="sortSelect">並べ替え：</label>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="date-desc">開催日 新しい順</option>
+                        <option value="date-asc">開催日 古い順</option>
                         <option value="title">ライブ名（A-Z）</option>
                         <option value="song">曲名（A-Z）</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="result-count-wrapper">
+                <div id="resultCount" class="result-count">検索結果：全件表示</div>
             </div>
 
             <div class="table-wrapper">
