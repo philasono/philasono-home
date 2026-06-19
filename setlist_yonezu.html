@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philasono - 音楽遍歴</title>
+    <title>Philasono - 米津玄師セットリスト分析</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,8 +28,8 @@
             <ul class="menu">
                 <li><a href="index.html#home">ホーム</a></li>
                 <li><a href="index.html#about">について</a></li>
-                <li><a class="active" href="music.html">音楽遍歴</a></li>
-                <li><a href="index.html#projects">プロジェクト</a></li>
+                <li><a href="music.html">音楽遍歴</a></li>
+                <li><a class="active" href="setlist.html">セットリスト分析</a></li>
                 <li><a href="index.html#contact">連絡先</a></li>
             </ul>
         </div>
@@ -37,19 +37,26 @@
 
     <main class="section section-alt section-music">
         <div class="section-header section-header-music">
-            <p class="eyebrow">MUSIC</p>
-            <h2>音楽遍歴</h2>
-            <p class="section-lead">過去から現在までのサウンドヒストリー。創作の原点と進化を辿るページです。</p>
+            <p class="eyebrow">SETLIST</p>
+            <h2>米津玄師セットリスト分析</h2>
+            <p class="section-lead">米津玄師楽曲のセットリスト登場回数をランキング化し、ライブ履歴とあわせて分析します。</p>
         </div>
-        <div class="hero-actions hero-actions-top">
-            <a class="button button-secondary" href="setlist.html">秋山黄色セットリスト分析</a>
-            <a class="button button-secondary" href="setlist_yonezu.html">米津玄師セットリスト分析</a>
+
+        <div class="ranking-wrapper">
+            <div class="ranking-header">
+                <p class="eyebrow">ランキング</p>
+                <h3>登場回数が多い曲名 TOP10</h3>
+                <p class="section-lead">セットリスト内で登場した回数が多い順に、上位10曲を表示します。</p>
+            </div>
+            <ol id="topRankingList" class="top-ranking-list">
+                <li>読み込み中...</li>
+            </ol>
         </div>
-        <!-- ライブ参加履歴テーブル -->
+
         <div class="live-history-container">
             <div class="table-controls">
                 <div class="search-wrapper">
-                    <input type="text" id="searchInput" class="search-box" placeholder="タイトルか場所で検索...">
+                    <input type="text" id="searchInput" class="search-box" placeholder="ライブ名・曲名で検索...">
                 </div>
                 <div class="filter-wrapper">
                     <label for="yearFilterSelect">参加年：</label>
@@ -58,17 +65,18 @@
                     </select>
                 </div>
                 <div class="sort-wrapper">
-                    <label for="sortSelect">ソート：</label>
+                    <label for="sortSelect">並べ替え：</label>
                     <select id="sortSelect" class="sort-select">
-                        <option value="date-desc">参加日（新しい順）</option>
-                        <option value="date-asc">参加日（古い順）</option>
-                        <option value="title">タイトル（A-Z）</option>
+                        <option value="date-desc">開催日 新しい順</option>
+                        <option value="date-asc">開催日 古い順</option>
+                        <option value="title">ライブ名（A-Z）</option>
+                        <option value="song">曲名（A-Z）</option>
                     </select>
                 </div>
             </div>
 
             <div class="result-count-wrapper">
-                <span id="resultCount" class="result-count"></span>
+                <div id="resultCount" class="result-count">検索結果：全件表示</div>
             </div>
 
             <div class="table-wrapper">
@@ -76,22 +84,22 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>参加日</th>
-                            <th>タイトル</th>
-                            <th>場所</th>
+                            <th>曲名</th>
                         </tr>
                     </thead>
                     <tbody id="liveTableBody">
                         <tr class="loading-row">
-                            <td colspan="4">データを読み込み中...</td>
+                            <td colspan="2">データを読み込み中...</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
         </div>
+
         <div class="hero-actions">
-            <a class="button button-primary" href="index.html#home">ホームに戻る</a>
+            <a class="button button-primary" href="music.html">音楽遍歴に戻る</a>
             <a class="button button-secondary" href="setlist.html">秋山黄色セットリスト分析</a>
         </div>
     </main>
@@ -99,6 +107,6 @@
     <footer>
         <p>&copy; 2026 Philasono. Designed with a modern edge.</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="setlist_yonezu.js"></script>
 </body>
 </html>
