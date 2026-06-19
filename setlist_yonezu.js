@@ -149,17 +149,26 @@ function renderTopRanking(data) {
 
     const ranking = Object.entries(counts)
         .map(([song, count]) => ({ song, count }))
-        .sort((a, b) => b.count - a.count || a.song.localeCompare(b.song, 'ja'))
-        .slice(0, 10);
+        .sort((a, b) => b.count - a.count || a.song.localeCompare(b.song, 'ja'));
 
-    if (ranking.length === 0) {
+    let prevCount = null;
+    let currentRank = 0;
+    const ranked = ranking.map((item, index) => {
+        if (item.count !== prevCount) {
+            currentRank = index + 1;
+            prevCount = item.count;
+        }
+        return { ...item, rank: currentRank };
+    }).filter(item => item.rank <= 10);
+
+    if (ranked.length === 0) {
         rankingElement.innerHTML = '<li>データを読み込み中...</li>';
         return;
     }
 
-    rankingElement.innerHTML = ranking.map((item, index) => `
+    rankingElement.innerHTML = ranked.map(item => `
         <li>
-            <span class="ranking-position">${index + 1}.</span>
+            <span class="ranking-position">${item.rank}.</span>
             <span class="ranking-song">${escapeHtml(item.song)}</span>
             <span class="ranking-count">${item.count}回</span>
         </li>
