@@ -751,7 +751,7 @@ footer p {
     font-size: 1.5rem;
 }
 
-.top-ranking-list {
+.ranking-wrapper .top-ranking-list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -759,9 +759,9 @@ footer p {
     gap: 0.75rem;
 }
 
-.top-ranking-list li {
+.ranking-wrapper .top-ranking-list li {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(4.5rem, auto) 1fr;
     gap: 1rem;
     align-items: flex-start;
     padding: 1rem 1.2rem;
@@ -771,33 +771,32 @@ footer p {
     color: #eef2ff;
 }
 
-.ranking-left {
+.ranking-wrapper .ranking-left {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    min-width: 4.5rem;
 }
 
-.ranking-right {
+.ranking-wrapper .ranking-right {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
 }
 
-.ranking-song-item {
+.ranking-wrapper .ranking-song-item {
     color: #dbe5ff;
     padding: 0.35rem 0.5rem;
     border-radius: 0.75rem;
     background: rgba(255, 255, 255, 0.05);
 }
 
-.ranking-position {
+.ranking-wrapper .ranking-position {
     color: #7af2ff;
     font-weight: 700;
     font-size: 1.05rem;
 }
 
-.ranking-count {
+.ranking-wrapper .ranking-count {
     color: #9bb4ff;
     font-weight: 600;
 }
