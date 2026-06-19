@@ -7,7 +7,7 @@ const GOOGLE_SHEETS_API_KEY = 'AIzaSyBwMRrKZllpUEr7oAEFwS-G1KZa0yMDUwQ';
 
 // 米津玄師セットリスト分析用スプレッドシートID
 // 実際のシートIDをここに入力してください
-const SETLIST_SHEET_ID = 'YOUR_YONEZU_SHEET_ID_HERE';
+const SETLIST_SHEET_ID = '1L92oDLb6ztAFA9exAPrVCFjhgZFfJjnt5eI7eZA0oPo';
 
 // シート名（スプレッドシート内のタブ名）
 const SETLIST_SHEET_NAME = 'シート1';
