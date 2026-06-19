@@ -169,8 +169,11 @@ function renderTopRanking(data) {
     rankingElement.innerHTML = displayed.map((group, index) => `
         <li>
             <div class="ranking-left">
-                <span class="ranking-position">${index + 1}.</span>
-                <span class="ranking-count">${group.count}回</span>
+                <span class="ranking-position">${index + 1}</span>
+                <div class="ranking-count-wrap">
+                    <span class="ranking-count-number">${group.count}</span>
+                    <span class="ranking-count-label">回</span>
+                </div>
             </div>
             <div class="ranking-right">
                 ${group.songs.map(song => `<div class="ranking-song-item">${escapeHtml(song)}</div>`).join('')}
