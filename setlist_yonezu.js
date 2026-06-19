@@ -151,26 +151,31 @@ function renderTopRanking(data) {
         .map(([song, count]) => ({ song, count }))
         .sort((a, b) => b.count - a.count || a.song.localeCompare(b.song, 'ja'));
 
-    let prevCount = null;
-    let currentRank = 0;
-    const ranked = ranking.map((item, index) => {
-        if (item.count !== prevCount) {
-            currentRank = index + 1;
-            prevCount = item.count;
+    const grouped = ranking.reduce((acc, item) => {
+        if (!acc.length || acc[acc.length - 1].count !== item.count) {
+            acc.push({ count: item.count, songs: [item.song] });
+        } else {
+            acc[acc.length - 1].songs.push(item.song);
         }
-        return { ...item, rank: currentRank };
-    }).filter(item => item.rank <= 10);
+        return acc;
+    }, []);
 
-    if (ranked.length === 0) {
+    const displayed = grouped.slice(0, 10);
+
+    if (displayed.length === 0) {
         rankingElement.innerHTML = '<li>データを読み込み中...</li>';
         return;
     }
 
-    rankingElement.innerHTML = ranked.map(item => `
+    rankingElement.innerHTML = displayed.map((group, index) => `
         <li>
-            <span class="ranking-position">${item.rank}.</span>
-            <span class="ranking-song">${escapeHtml(item.song)}</span>
-            <span class="ranking-count">${item.count}回</span>
+            <div class="ranking-left">
+                <span class="ranking-position">${index + 1}.</span>
+                <span class="ranking-count">${group.count}回</span>
+            </div>
+            <div class="ranking-right">
+                ${group.songs.map(song => `<div class="ranking-song-item">${escapeHtml(song)}</div>`).join('')}
+            </div>
         </li>
     `).join('');
 }

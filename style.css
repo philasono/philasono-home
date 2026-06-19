@@ -761,9 +761,9 @@ footer p {
 
 .top-ranking-list li {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     gap: 1rem;
-    align-items: center;
+    align-items: flex-start;
     padding: 1rem 1.2rem;
     border-radius: 0.85rem;
     background: rgba(255, 255, 255, 0.03);
@@ -771,13 +771,30 @@ footer p {
     color: #eef2ff;
 }
 
+.ranking-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 4.5rem;
+}
+
+.ranking-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.ranking-song-item {
+    color: #dbe5ff;
+    padding: 0.35rem 0.5rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+}
+
 .ranking-position {
     color: #7af2ff;
     font-weight: 700;
-}
-
-.ranking-song {
-    color: #dbe5ff;
+    font-size: 1.05rem;
 }
 
 .ranking-count {
